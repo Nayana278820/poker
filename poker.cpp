@@ -5,6 +5,9 @@ bool straightFlush(){
 	if(straight() && flush()){
 		return true;
 	}
+	else{
+		return false;
+	}
 }
 bool fourOfAKind(){
 	for(int i = 0; i < playerone.size(); i++){
