@@ -10,14 +10,8 @@ using namespace std;
     if(playernum == 1){
     playerone.clear();
     }
-    /*if(playernum == 2){
-    playertwo.clear();
-    }
-    if(playernum == 3){
-    playerthree.clear();
-    }*/
  }
-
+ 
  string deal(){
     string card;
 
@@ -102,3 +96,26 @@ void dealHand(int numPlayer )
     }
 }
 
+bool straight (){
+	// NOT FINISHED!
+	//for(int
+	//int num = playerone[i].at(0) - 64;
+
+	// made a heap of the ints
+	int count=0;
+for(int i = 0; i < playerone.size(); i++){
+		for(int j = 0; j < dealcards.size(); j++){
+			if( (player[j] - dealcards[i]) == 1) {
+				count++;
+				// so that will go to next card in player's deck
+				j = dealcards.size();
+			}
+		}
+	}
+	if(count == 4){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
