@@ -21,8 +21,9 @@ class Poker{
         void money(int amount, char AorS); // each persons money
         //int getmoney(); // returns money,how much each player has
         //void totalmoney(int amount); // pool of money
-        string win(); //win calls winner money at the end
+        int win(); //win calls winner money at the end
                       //couts winner money 
+        int check_winner()
         bool royalFlush();
         bool straighFlush();
         bool fourOfAKind();
