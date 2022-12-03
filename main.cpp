@@ -6,6 +6,7 @@
 #include <random>
 #include <ctime>
 #include <stdio.h>
+#include <algorithm>
 
 using namespace std;
 
@@ -97,7 +98,7 @@ int main(){
             players->printCards("dealer");
 		}
 
-        if(players->threeOfAKind()){
+        if(players->straight()){
             cout << "hey";
         }
 
@@ -382,12 +383,6 @@ bool poker::threeOfAKind(){
     int numOfCardTwo;
     int numOfDealtCard;
 
-    playerOne[0] = "3H";
-    playerOne[1] = "5H";
-
-    dealtcards[4] = "3H";
-    dealtcards[1] = "5H";
-    // dealtcards[3]
     cout << " the player's cards are: ";
     printCards("player");
 
@@ -419,11 +414,11 @@ bool poker::threeOfAKind(){
         }
 
         if(numOfDealtCard == numOfCardOne || numOfDealtCard == numOfCardTwo){
-            cout << "numOfCardOne: " << numOfCardOne << endl;
-            cout << "numOfCardTwo: " << numOfCardTwo << endl;
-            cout << "dealtCards " << numOfDealtCard << endl;
+           // cout << "numOfCardOne: " << numOfCardOne << endl;
+            //cout << "numOfCardTwo: " << numOfCardTwo << endl;
+            //cout << "dealtCards " << numOfDealtCard << endl;
             count++;
-            cout << "count: " << count << endl;
+            //cout << "count: " << count << endl;
 	    }
     }
 
@@ -433,4 +428,75 @@ bool poker::threeOfAKind(){
 	else{
 		return false;
 	}
+}
+
+bool poker::straight (){
+	// if both of cards are same
+    int numOfCardOne = 0;
+    int numOfCardTwo = 0;
+    int numOfDealtCard = 0;
+    vector<int> sortedCards;
+
+    for(int i = 0; i < playerOne.size(); i++){
+        if(playerOne[i].length() == 2){
+            sortedCards.push_back(playerOne[i].at(0) - 48);
+        }
+        else if(playerOne[i].length() == 3){
+            sortedCards.push_back(10 + (playerOne[i].at(1) - 48));
+        }
+    }
+    for(int i = 0; i < dealtcards.size(); i++){
+        if(dealtcards[i].length() == 2){
+            sortedCards.push_back(playerOne[i].at(0) - 48);
+        }
+        else if(playerOne[i].length() == 3){
+            sortedCards.push_back(10 + (playerOne[i].at(1) - 48));
+        }
+    }
+    //cout << "numOfCardOne: " << numOfCardOne << endl;
+
+    // If both have same number, means that they are a pair
+    /*int size = sizeof(sortedCards)/ sizeof(int);
+    sort (sortedCards, sortedCards+size)
+    */
+  // sort(sortedCards.begin(), sortedCards.end());
+  //bubble sort
+    for(int i =0; i<sortedCards.size()-1; i++){
+         for(int j=1; i<sortedCards.size()-i-1; j++){
+        int swap;
+        if(sortedCards[j] > sortedCards[j+1]){
+            swap = sortedCards[j];
+            sortedCards[j] = sortedCards[j+1];
+            sortedCards[j+1] = swap;
+        }
+    }
+    }
+    for (int i = 0; i< sortedCards.size() ; i++ ){
+    cout << "sorted cards: " << sortedCards[i];
+    }
+    
+    
+/*
+    if(numOfCardTwo-numOfCardOne == 1){
+        return true;
+    }*/
+
+    // Get the number of the dealer's cards and then compare them to the
+    // numbers of the players cards
+    // If are the same, are a pair
+    for(int i = 0; i < dealtcards.size(); i++){
+        if(dealtcards[i].length() == 2){
+            numOfDealtCard = dealtcards[i].at(0) - 48;
+        }
+        else if(dealtcards[i].length() == 3){
+            numOfDealtCard = 10 + (dealtcards[i].at(1) - 48);
+        }
+        //cout << "numOfDealtCard " << numOfDealtCard << endl;
+
+        if(numOfDealtCard == numOfCardOne || numOfDealtCard == numOfCardTwo){
+		    return true;
+	    }
+    }
+    return false;
+
 }
