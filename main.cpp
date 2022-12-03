@@ -29,7 +29,7 @@ class poker{
         void money(int amount, char AorS); // each persons money
         //int getmoney(); // returns money,how much each player has
         //void totalmoney(int amount); // pool of money
-        string win(); //win calls winner money at the end
+        int win(); //win calls winner money at the end
                       //couts winner money 
         bool royalFlush();
         bool straighFlush();
@@ -98,10 +98,7 @@ int main(){
             players->printCards("dealer");
 		}
 
-        if(players->straight()){
-            cout << "hey";
-        }
-
+        players->win();
 		/*if(move == 'r'){
 			// for initalizer: start with next player (circular way)
 			// for condition- stop when get back to that person
@@ -258,51 +255,30 @@ void poker::printCards(string player){
         cout << endl;
 }
 
-bool poker::twoPair(){
-	int count = 0;
-    int numOfCardOne;
-    int numOfCardTwo;
-    int numOfDealtCard;
+// Poker Hands
 
-    if(playerOne[0].length() == 2){
-        numOfCardOne = playerOne[0].at(0) - 48;
-    }
-    else if(playerOne[0].length() == 3){
-        numOfCardOne = 10 + (playerOne[0].at(1) - 48);
-    }
-    //cout << "numOfCardOne: " << numOfCardOne << endl;
-
-    if(playerOne[1].length() == 2){
-        numOfCardTwo = playerOne[1].at(0) - 48;
-    }
-    else if(playerOne[1].length() == 3){
-        numOfCardTwo = 10 + (playerOne[1].at(1) - 48);
-    }
-
-
-	for(int i = 0; i < dealtcards.size(); i++){
-        if(dealtcards[i].length() == 2){
-            numOfDealtCard = dealtcards[i].at(0) - 48;
+bool poker::highCard(){
+	int biggestCard = 0;
+    int num;
+	for(int i = 0; i < playerOne.size(); i++){
+        // If the card 
+        if(playerOne[i].length() == 2){
+            num = playerOne[i].at(0) - 48;
         }
-        else if(dealtcards[i].length() == 3){
-            numOfDealtCard = 10 + (dealtcards[i].at(1) - 48);
+        else if(playerOne[i].length() == 3){
+            //num = playerOne[i].at(0) + playerOne[i].at(1);
+            // if card has length of 3, add 10 to the ASCII value of the
+            // second char
+            num = 10 + (playerOne[i].at(1) - 48);
         }
 
-        if(numOfDealtCard == numOfCardOne || numOfDealtCard == numOfCardTwo){
-            //cout << "numOfCardOne: " << numOfCardOne << endl;
-            //cout << "numOfCardTwo: " << numOfCardTwo << endl;
-            //cout << "dealtCards " << numOfDealtCard << endl;
-            count++;
-            //cout << "count: " << count << endl;
-	    }
-    }
-
-	if(count == 2){
-		return true;
+		if(num > biggestCard){
+			biggestCard = num;
+		}
 	}
-	else{
-		return false;
-	}
+	// we'll always have highest card
+    //cout << biggestCard;
+	return true;
 }
 
 bool poker::pair(){
@@ -352,42 +328,66 @@ bool poker::pair(){
     return false;
 
 }
+bool poker::twoPair(){
+	int count = 0;
+    int numOfCardOne;
+    int numOfCardTwo;
+    int numOfDealtCard;
 
-bool poker::highCard(){
-	int biggestCard = 0;
-    int num;
-	for(int i = 0; i < playerOne.size(); i++){
-        // If the card 
-        if(playerOne[i].length() == 2){
-            num = playerOne[i].at(0) - 48;
+    if(playerOne[0].length() == 2){
+        numOfCardOne = playerOne[0].at(0) - 48;
+    }
+    else if(playerOne[0].length() == 3){
+        numOfCardOne = 10 + (playerOne[0].at(1) - 48);
+    }
+    //cout << "numOfCardOne: " << numOfCardOne << endl;
+
+    if(playerOne[1].length() == 2){
+        numOfCardTwo = playerOne[1].at(0) - 48;
+    }
+    else if(playerOne[1].length() == 3){
+        numOfCardTwo = 10 + (playerOne[1].at(1) - 48);
+    }
+
+
+	for(int i = 0; i < dealtcards.size(); i++){
+        if(dealtcards[i].length() == 2){
+            numOfDealtCard = dealtcards[i].at(0) - 48;
         }
-        else if(playerOne[i].length() == 3){
-            //num = playerOne[i].at(0) + playerOne[i].at(1);
-            // if card has length of 3, add 10 to the ASCII value of the
-            // second char
-            num = 10 + (playerOne[i].at(1) - 48);
+        else if(dealtcards[i].length() == 3){
+            numOfDealtCard = 10 + (dealtcards[i].at(1) - 48);
         }
 
-		if(num > biggestCard){
-			biggestCard = num;
-		}
+        if(numOfDealtCard == numOfCardOne || numOfDealtCard == numOfCardTwo){
+            //cout << "numOfCardOne: " << numOfCardOne << endl;
+            //cout << "numOfCardTwo: " << numOfCardTwo << endl;
+            //cout << "dealtCards " << numOfDealtCard << endl;
+            count++;
+            //cout << "count: " << count << endl;
+	    }
+    }
+
+	if(count == 2){
+		return true;
 	}
-	// we'll always have highest card
-    //cout << biggestCard;
-	return true;
+	else{
+		return false;
+	}
 }
-
 bool poker::threeOfAKind(){
 	int count = 0;
     int numOfCardOne;
     int numOfCardTwo;
     int numOfDealtCard;
 
+
+/*
     cout << " the player's cards are: ";
     printCards("player");
 
     cout << " the dealer's cards are: ";
     printCards("dealer");
+    */
 
     if(playerOne[0].length() == 2){
         numOfCardOne = playerOne[0].at(0) - 48;
@@ -418,7 +418,6 @@ bool poker::threeOfAKind(){
             //cout << "numOfCardTwo: " << numOfCardTwo << endl;
             //cout << "dealtCards " << numOfDealtCard << endl;
             count++;
-            //cout << "count: " << count << endl;
 	    }
     }
 
@@ -437,15 +436,14 @@ bool poker::straight (){
     int numOfCardTwo = 0;
     int numOfDealtCard = 0;
     vector<int> sortedCards;
-
-    playerOne[0] = "1H";
-    playerOne[1] = "4D";
-
-    dealtcards[0] = "3A";
-    dealtcards[1] = "2C"; 
-    dealtcards[2] = "5A"; 
-   // dealtcards[4] = "5A";
-
+    
+    /*dealtcards[0] = "3H";
+    dealtcards[1] = "2H";
+    dealtcards[3] = "5H";
+    dealtcards[4] = "2A";
+    playerOne[0] = "4H";
+    playerOne[1] = "1H";
+ */
     for(int i = 0; i < playerOne.size(); i++){
         if(playerOne[i].length() == 2){
             sortedCards.push_back(playerOne[i].at(0) - 48);
@@ -462,12 +460,7 @@ bool poker::straight (){
             sortedCards.push_back(10 + (dealtcards[i].at(1) - 48));
         }
     }
-    //cout << "numOfCardOne: " << numOfCardOne << endl;
-
-    // If both have same number, means that they are a pair
-    /*int size = sizeof(sortedCards)/ sizeof(int);
-    sort (sortedCards, sortedCards+size)
-    */
+  
   // sort(sortedCards.begin(), sortedCards.end());
   //bubble sort
     for(int i =0; i<sortedCards.size(); i++){
@@ -484,26 +477,203 @@ bool poker::straight (){
     }
     }
    
-   /* for (int i = 0; i< sortedCards.size() ; i++ ){
-    cout << "sorted cards: " << sortedCards[i];
-    }
-    */
-    
-/*
-    if(numOfCardTwo-numOfCardOne == 1){
-        return true;
-    }*/
-
     for(int i = 0; i < sortedCards.size()-1; i++){
-        if(sortedCards[i] == sortedCards[i+1]){
+       // cout << "hi";
+        if(sortedCards[i] + 1 == sortedCards[i+1]){
            count ++;
+          /* cout << "sorted : " << sortedCards[i] << endl;
+           cout << "sorted+1 : " << sortedCards[i+1] << endl;
+           cout << "count : " << count<< endl;
+           */
         }
     }
-       if(count >= 5){
+       if(count >= 4){
         return true;
        }
         else{
             return false;
         }
        }
-       
+bool poker::flush(){ // same as three of a kind but for 5 cards 
+    int count1 = 0;
+    int count2 = 0;
+    char signOfCardOne;
+    char signOfCardTwo;
+    char signOfDealtCard;
+   
+   /*dealtcards[0] = "3H";
+    dealtcards[1] = "2H";
+    dealtcards[3] = "5H";
+    dealtcards[4] = "2A";
+    playerOne[0] = "4H";
+    playerOne[1] = "1H";
+    */
+/*
+    dealtcards[0] = "3H";
+    dealtcards[1] = "5H";
+    dealtcards[3] = "6H";
+    dealtcards[4] = "2H";
+    playerOne[0] = "7A";
+    playerOne[1] = "3H";
+    */
+
+   /* cout << " the player's cards are: ";
+    printCards("player");
+
+    cout << " the dealer's cards are: ";
+    printCards("dealer"); */
+    
+
+    if(playerOne[0].length() == 2){
+        signOfCardOne = playerOne[1].at(1);
+    }
+    else if(playerOne[0].length() == 3){
+        signOfCardOne = (playerOne[2].at(2));
+    }
+    //cout << "numOfCardOne: " << numOfCardOne << endl;
+
+    if(playerOne[1].length() == 2){
+        signOfCardTwo = playerOne[1].at(1);
+    }
+    else if(playerOne[1].length() == 3){
+        signOfCardTwo = (playerOne[1].at(2));
+    }
+
+
+	for(int i = 0; i < dealtcards.size(); i++){
+        if(dealtcards[i].length() == 2){
+            signOfDealtCard = dealtcards[i].at(1);
+        }
+        else if(dealtcards[i].length() == 3){
+            signOfDealtCard = (dealtcards[i].at(2));
+        }
+
+            // cout << "numOfCardOne: " << numOfCardOne << endl;
+            //cout << "numOfCardTwo: " << numOfCardTwo << endl;
+            //cout << "dealtCards " << numOfDealtCard << endl;
+        if(signOfDealtCard == signOfCardOne){
+            count1++;
+           /* cout << "sign of Dealt card: " << i << " " << signOfDealtCard << endl;
+            cout << "Sign of cardone: " << i << " " << signOfCardOne << endl;
+            cout << "count1:  " << count1; */
+	    }
+        if(signOfDealtCard == signOfCardTwo){
+            count2++;
+            /*
+            cout << "sign of Dealt card: " << i << " " << signOfDealtCard << endl;
+            cout << "Sign of cardone: " << i << " " <<signOfCardOne << endl;
+            cout << "count2: " << count2; */
+        }
+    }
+
+    // count will be three if both of player's cards are of same sign and 
+    // two of same same sign are on the table
+    // will be four if one of player's cards and four of table's cards are same sign
+	if(count1 >= 3 || count2 >=3){
+		return true;
+	}
+	else{
+		return false;
+	}
+    }
+
+bool poker::fullHouse(){
+	if(threeOfAKind() && pair()){
+		return true;
+	}
+	else{
+		return false;
+	}
+    }
+bool poker::fourOfAKind(){
+	int count = 0;
+    int numOfCardOne;
+    int numOfCardTwo;
+    int numOfDealtCard;
+/*
+    cout << " the player's cards are: ";
+    printCards("player");
+
+    cout << " the dealer's cards are: ";
+    printCards("dealer");
+    */
+
+    if(playerOne[0].length() == 2){
+        numOfCardOne = playerOne[0].at(0) - 48;
+    }
+    else if(playerOne[0].length() == 3){
+        numOfCardOne = 10 + (playerOne[0].at(1) - 48);
+    }
+    //cout << "numOfCardOne: " << numOfCardOne << endl;
+
+    if(playerOne[1].length() == 2){
+        numOfCardTwo = playerOne[1].at(0) - 48;
+    }
+    else if(playerOne[1].length() == 3){
+        numOfCardTwo = 10 + (playerOne[1].at(1) - 48);
+    }
+
+
+	for(int i = 0; i < dealtcards.size(); i++){
+        if(dealtcards[i].length() == 2){
+            numOfDealtCard = dealtcards[i].at(0) - 48;
+        }
+        else if(dealtcards[i].length() == 3){
+            numOfDealtCard = 10 + (dealtcards[i].at(1) - 48);
+        }
+
+        if(numOfDealtCard == numOfCardOne || numOfDealtCard == numOfCardTwo){
+           // cout << "numOfCardOne: " << numOfCardOne << endl;
+            //cout << "numOfCardTwo: " << numOfCardTwo << endl;
+            //cout << "dealtCards " << numOfDealtCard << endl;
+            count++;
+	    }
+    }
+
+	if(count == 4){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+bool poker::straighFlush(){
+	if(straight() && flush()){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+int poker::win(){
+        bool count = false;
+	if(straighFlush() == true){
+		cout << "Won by rank 9";
+	}
+	else if(fourOfAKind() == true){
+		cout << "Won by rank 8";
+	}
+	else if(fullHouse() == true){
+		cout << "Won by rank 7";
+	}
+	else if(flush() == true){
+		cout << "Won by rank 6";
+	}
+	else if(straight() == true){
+		cout << "Won by rank 5";
+	}
+	else if(threeOfAKind() == true){
+		cout << "Won by rank 4";
+	}
+	else if(twoPair() == true){
+		cout << "Won by rank 3";
+	}
+	else if(pair() == true){
+		cout << "Won by rank 2";
+	}
+        else if(highCard() == true ){
+                cout << "Won by rank 1";
+        }
+	return count;	
+
+}
