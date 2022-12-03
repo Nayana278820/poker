@@ -1,7 +1,14 @@
 //bool royalFlush(int player){
 #include "poker.h"
-// lol
-//}
+using namespace std;
+#include <vector>
+
+#include <string>
+
+poker::poker() {
+ playerOneMoney = 0;
+};
+/*
 bool straightFlush(){
 	if(straight() && flush()){
 		return true;
@@ -9,11 +16,12 @@ bool straightFlush(){
 	else{
 		return false;
 	}
-}
+};
+
 bool fourOfAKind(){
-	for(int i = 0; i < playerone.size(); i++){
+	for(int i = 0; i < playerOne.size(); i++){
 		int count = 0;
-		string cardToCheck = playerone[i];
+		string cardToCheck = playerOne[i];
 		count++;
 		// check if have two of same cards in hand
 		if(i == 0){
@@ -21,7 +29,7 @@ bool fourOfAKind(){
 				count ++;
 			}
 		}
-		for(int j = 0; j < dealcards.size(); j++){
+		for(int j = 0; j < dealtcards.size(); j++){
 			if(cardToCheck == dealtcards[i]){
 				count++;
 			}
@@ -34,7 +42,9 @@ bool fourOfAKind(){
 			return false;
 		}
 	}
+	return false;
 }
+
 bool fullHouse(){
 	if(threeOfAKind() && pair()){
 		return true;
@@ -42,13 +52,15 @@ bool fullHouse(){
 	else{
 		return false;
 	}
+	return false;
 }
+
 bool flush(){
-	for(int i = 0; i < playerone.size(); i++){
-		char sign = playerone[i].at(1);
+	for(int i = 0; i < playerOne.size(); i++){
+		char sign = playerOne[i].at(1);
 		int count = 0;
 		if(i == 0){
-			if(sign == playerone[i + 1].at(1){
+			if(sign == playerOne[i + 1].at(1)){
 				count++;
 			}
 		}
@@ -66,20 +78,22 @@ bool flush(){
 			return false;
 		}
 	}
+	return false;
 }
+
 bool straight (){
 	// NOT FINISHED!
 	//for(int
 	//int num = playerone[i].at(0) - 64;
 
 	// made a heap of the ints
-	
-	
+	return false;
 }
+
 bool threeOfAKind(){
-	for(int i = 0; i < playerone.size(); i++){
+	for(int i = 0; i < playerOne.size(); i++){
 		int count = 0;
-		string cardToCheck = playerone[i];
+		string cardToCheck = playerOne[i];
 		count++;
 		// check if have two of same cards in hand
 		if(i == 0){
@@ -96,19 +110,18 @@ bool threeOfAKind(){
 		if(count == 3){
 			return true;
 		}
-		else{
-			return false;
-		}
 	}
-
+	return false;
 }
+
 bool twoPair(){
-	for(int i = 0; i < playerone.size(); i++){
-		for(int j = 0; j < dealcards.size(); j++){
-			if(player[i] == dealcards[j]){
+	int count =0;
+	for(int i = 0; i < playerOne.size(); i++){
+		for(int j = 0; j < dealtcards.size(); j++){
+			if(player[i] == dealtcards[j]){
 				count++;
 				// so that will go to next card in player's deck
-				j = dealcards.size();
+				j = dealtcards.size();
 			}
 		}
 	}
@@ -121,12 +134,12 @@ bool twoPair(){
 }
 bool pair(){
 	// if both of cards are same
-	if(playerone[0] == playerone[1]){
+	if(playerOne[0] == playerOne[1]){
 		return true;
 	}
 	for(int i = 0; i < playerone.size(); i++){
 		for(int j = 0; i < dealtcards.size(); j++){
-			if(playerone[i] == dealcards[j]){
+			if(playerone[i] == dealtcards[j]){
 				return true;
 			}
 		}
@@ -137,8 +150,8 @@ bool pair(){
 }
 bool highCard(){
 	int biggestCard = 0;
-	for(int i = 0; i < playerone.size(); i++){
-		if(playerone[i] > biggestCard){
+	for(int i = 0; i < playerOne.size(); i++){
+		if(playerOne[i] > biggestCard){
 			playerone = biggestCard;
 		}
 	}
@@ -148,10 +161,14 @@ bool highCard(){
 ////////////////////////////////////////////////////////////////////////////////
 /// 
 void fold(){ // lay down your cards and stop playing
-    playerone.clear();
- }
+    playerOne.clear();
+ }*/
 
- string deal(){
+void displayCards(){
+
+}
+
+ string poker::deal (){
     string card;
 
     int playerCard = (rand() % (13 - 1 + 1)) + 1;
@@ -161,7 +178,7 @@ void fold(){ // lay down your cards and stop playing
  
     switch(playerCard)
     {
-        case 1: num = "Ace"; 
+        case 1: num = "1"; 
         break;
         case 2: num = "2"; 
         break;
@@ -181,11 +198,11 @@ void fold(){ // lay down your cards and stop playing
         break;
         case 10: num = "10"; 
         break;
-        case 11: num = "Jack"; 
+        case 11: num = "11"; 
         break;
-        case 12: num = "Queen"; 
+        case 12: num = "12"; 
         break;
-        case 13: num = "King"; 
+        case 13: num = "13"; 
         break;
     }
 
@@ -193,24 +210,21 @@ void fold(){ // lay down your cards and stop playing
  
     switch(playerSuit)
     {
-        case 1: face = " of Hearts"; break;
-        case 2: face = " of Spades"; break;
-        case 3: face = " of Diamonds"; break;
-        case 4: face = " of Clubs"; break;
+        case 1: face = "H"; break;
+        case 2: face = "S"; break;
+        case 3: face = "D"; break;
+        case 4: face = "C"; break;
     }
- 
     card = (num + face);
- 
     return card; 
 }
 
-
 // Deals five random cards to player 
 // also checks for duplicates
-void dealHand()
+void poker::dealHand(int numCards)
 {
     int cards = 0;
-    for(int i = 0; i < 2; i++) {
+    for(int i = 0; i < numCards; i++) {
         string j = deal();
 
         for(int k = 0; k < dealtcards.size(); k++){
@@ -222,7 +236,7 @@ void dealHand()
             continue; // if the card is already dealt, then get a new card again
         }
         }
-                playerone.push_back(j); // add it to the player cards vector
+                playerOne.push_back(j); // add it to the player cards vector
          /*   if(numPlayer == 2){
                 playertwo.push_back(j); // add it to the player cards vector
             }
@@ -231,7 +245,7 @@ void dealHand()
             }*/
     }
 }
-
+/*
 bool straight (){
 	// NOT FINISHED!
 	//for(int
@@ -239,9 +253,9 @@ bool straight (){
 
 	// made a heap of the ints
 	int count=0;
-for(int i = 0; i < playerone.size(); i++){
-		for(int j = 0; j < dealcards.size(); j++){
-			if( (player[j] - dealcards[i]) == 1) {
+for(int i = 0; i < playerOne.size(); i++){
+		for(int j = 0; j < dealtcards.size(); j++){
+			if( (player[j] - dealtcards[i]) == 1) {
 				count++;
 				// so that will go to next card in player's deck
 				j = dealcards.size();
@@ -255,3 +269,4 @@ for(int i = 0; i < playerone.size(); i++){
 		return false;
 	}
 }
+*/

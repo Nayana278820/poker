@@ -5,17 +5,19 @@
 
 using namespace std;
 
-class Poker{
+class poker{
     private:
         std::vector<string> dealtcards;
-        std::vector<string> playerone;
+        std::vector<string> playerOne;
         int playerOneMoney;
        
 
     public:
+       //int playerOneMoney;
         void fold(); 
-        void deal(); // if card already dealt if call random again
+        string deal(); // if card already dealt if call random again
                                //number of players * 2 + 5
+        void dealHand(int numcards);
         void displayCards();
         int numCards(); //returns number of cards in dealtcard vector
         void money(int amount, char AorS); // each persons money
@@ -34,13 +36,13 @@ class Poker{
         bool pair();
         bool highCard();
 
-        Poker();  
-        ~Poker();
+        poker();  
+        ~poker();
 
          //void raise(int player, int amount);
         //void check(int player);
         //void checkDuplicates(); 
         //int winnerMoney(int player); 
-}
+};
 
 #endif POKER_H
