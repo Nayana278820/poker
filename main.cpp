@@ -97,7 +97,7 @@ int main(){
             players->printCards("dealer");
 		}
 
-        if(players->twoPair()){
+        if(players->threeOfAKind()){
             cout << "hey";
         }
 
@@ -263,13 +263,6 @@ bool poker::twoPair(){
     int numOfCardTwo;
     int numOfDealtCard;
 
-    playerOne[0] = "3H";
-    playerOne[1] = "5H";
-
-    dealtcards[4] = "3H";
-    dealtcards[1] = "5H";
-
-
     if(playerOne[0].length() == 2){
         numOfCardOne = playerOne[0].at(0) - 48;
     }
@@ -381,4 +374,63 @@ bool poker::highCard(){
 	// we'll always have highest card
     //cout << biggestCard;
 	return true;
+}
+
+bool poker::threeOfAKind(){
+	int count = 0;
+    int numOfCardOne;
+    int numOfCardTwo;
+    int numOfDealtCard;
+
+    playerOne[0] = "3H";
+    playerOne[1] = "5H";
+
+    dealtcards[4] = "3H";
+    dealtcards[1] = "5H";
+    // dealtcards[3]
+    cout << " the player's cards are: ";
+    printCards("player");
+
+    cout << " the dealer's cards are: ";
+    printCards("dealer");
+
+    if(playerOne[0].length() == 2){
+        numOfCardOne = playerOne[0].at(0) - 48;
+    }
+    else if(playerOne[0].length() == 3){
+        numOfCardOne = 10 + (playerOne[0].at(1) - 48);
+    }
+    //cout << "numOfCardOne: " << numOfCardOne << endl;
+
+    if(playerOne[1].length() == 2){
+        numOfCardTwo = playerOne[1].at(0) - 48;
+    }
+    else if(playerOne[1].length() == 3){
+        numOfCardTwo = 10 + (playerOne[1].at(1) - 48);
+    }
+
+
+	for(int i = 0; i < dealtcards.size(); i++){
+        if(dealtcards[i].length() == 2){
+            numOfDealtCard = dealtcards[i].at(0) - 48;
+        }
+        else if(dealtcards[i].length() == 3){
+            numOfDealtCard = 10 + (dealtcards[i].at(1) - 48);
+        }
+
+        if(numOfDealtCard == numOfCardOne || numOfDealtCard == numOfCardTwo){
+            cout << "numOfCardOne: " << numOfCardOne << endl;
+            cout << "numOfCardTwo: " << numOfCardTwo << endl;
+            cout << "dealtCards " << numOfDealtCard << endl;
+            count++;
+            cout << "count: " << count << endl;
+	    }
+    }
+
+	if(count == 3){
+		return true;
+	}
+	else{
+		return false;
+	}
 }
