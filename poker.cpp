@@ -2,6 +2,43 @@
 #include "poker.h"
 // lol
 //}
+int win(){
+        bool count = false;
+	if(straightFlush() == true){
+		cout << "Won by rank 9";
+	}
+	else if(fourOfAKind() == true){
+		cout << "Won by rank 8";
+	}
+	else if(fullHouse() == true){
+		cout << "Won by rank 7";
+	}
+	else if(flush() == true){
+		cout << "Won by rank 6";
+	}
+	else if(straight() == true){
+		cout << "Won by rank 5";
+	}
+	else if(threeOfAKind() == true){
+		cout << "Won by rank 4";
+	}
+	else if(twoPair() == true){
+		cout << "Won by rank 3";
+	}
+	else if(pair() == true){
+		cout << "Won by rank 2";
+	}
+        else if(highCard() == true ){
+                cout << "Won by rank 1";
+        }
+	return count;	
+
+}
+int check_winner(){
+	if (win() == true ){
+                cout << "Player wins";
+        }
+}
 bool straightFlush(){
 	if(straight() && flush()){
 		return true;
