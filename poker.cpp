@@ -1,5 +1,6 @@
 //bool royalFlush(int player){
 #include "poker.h"
+// lol
 //}
 bool straightFlush(){
 	if(straight() && flush()){
