@@ -1,5 +1,5 @@
 //bool royalFlush(int player){
-
+#include "poker.h"
 //}
 bool straightFlush(){
 	if(straight() && flush()){
@@ -146,10 +146,8 @@ bool highCard(){
 }
 ////////////////////////////////////////////////////////////////////////////////
 /// 
-void fold(int playernum){ // lay down your cards and stop playing
-    if(playernum == 1){
+void fold(){ // lay down your cards and stop playing
     playerone.clear();
-    }
  }
 
  string deal(){
@@ -208,7 +206,7 @@ void fold(int playernum){ // lay down your cards and stop playing
 
 // Deals five random cards to player 
 // also checks for duplicates
-void dealHand(int numPlayer )
+void dealHand()
 {
     int cards = 0;
     for(int i = 0; i < 2; i++) {
@@ -223,10 +221,7 @@ void dealHand(int numPlayer )
             continue; // if the card is already dealt, then get a new card again
         }
         }
-
-            if(numPlayer == 1){
                 playerone.push_back(j); // add it to the player cards vector
-            }
          /*   if(numPlayer == 2){
                 playertwo.push_back(j); // add it to the player cards vector
             }

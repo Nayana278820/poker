@@ -1,17 +1,15 @@
 #include <vector>
-
 #ifndef	POKER_H
 #define	POKER_H
+#include <cstring>
+
+using namespace std;
 
 class Poker{
     private:
         std::vector<string> dealtcards;
         std::vector<string> playerone;
-        std::vector<string> playertwo;
-        std::vector<string> playerthree;
         int playerOneMoney;
-        int playerTwoMoney;
-        int playerThreeMoney;
        
 
     public:
@@ -44,3 +42,5 @@ class Poker{
         //void checkDuplicates(); 
         //int winnerMoney(int player); 
 }
+
+#endif POKER_H
