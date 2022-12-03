@@ -22,7 +22,8 @@ class poker{
         string deal(); // if card already dealt if call random again
                                //number of players * 2 + 5
         void dealHand(int numcards, string player);
-        void displayCards();
+        //void displayCards();
+        void printCards(string player); 
         int numCards(); //returns number of cards in dealtcard vector
         void money(int amount, char AorS); // each persons money
         //int getmoney(); // returns money,how much each player has
@@ -59,22 +60,25 @@ int main(){
 
     cout << "Your cards are: ";
     players->dealHand(2, "player"); // deal cards to the players
-    cout << endl;
+    players->printCards("player");//cout << endl;
     
     cout << "The cards on table are: ";
 	players->dealHand(3, "dealer"); // deal cards to the players
+    players->printCards("dealer");
 
     // do it until we have 5 cards down or until everyone but one player won
-    while(players->numCards() < 6){
+    while(players->numCards() < 5){
 		// Ask each player for first move;
 		//int i;
 		//for(i = 1; i < numPlayers + 1; i++){
-			cout << "\nPlayer,  what is your move (fold = f, raise = r, check = c, deal = d)? ";
+			cout << "\nPlayer,  what is your move (fold = f, raise = r, check = c)? ";
 			cin >> move;
 
 			if(move == 'f'){
 				players->fold();
-				numFolds ++;
+                cout << "You folded. Game over!\n";
+                return 0;
+				//numFolds ++;
 			}
 			else if(move == 'r'){
 				cout << "How much is your raise? ";
@@ -87,7 +91,15 @@ int main(){
             else if(move == 'c'){
 				//players.check();
 			}
+
+            players->dealHand(1, "dealer");
+            cout << "Table's cards are now: ";
+            players->printCards("dealer");
 		}
+
+        if(players->twoPair()){
+            cout << "hey";
+        }
 
 		/*if(move == 'r'){
 			// for initalizer: start with next player (circular way)
@@ -115,7 +127,7 @@ int main(){
 		}
 		*/
 	//	if(players->numCards() != 5){
-			players->dealHand(1, "player");
+			//players->dealHand(1, "player");
 	//	}
     return 1;
 	}
@@ -132,7 +144,7 @@ void poker::fold(){ // lay down your cards and stop playing
  }
 
 int poker::numCards(){
-    return playerOne.size();
+    return dealtcards.size();
 }
 
  string poker::deal (){
@@ -223,13 +235,150 @@ void poker::dealHand(int numCards, string player){
         // When everything is checked, push back onto right vector
         if(player == "player"){
                 playerOne.push_back(card);
-                cout << playerOne[i] << " ";
+                //cout << playerOne[i] << " ";
             }
         else{
             dealtcards.push_back(card);
-            cout << dealtcards[i] << " ";
+            //cout << dealtcards[i] << " ";
         }
     }
 }
-	// need a display cards function to display the cards that the dealer puts down
-	//players.displayCards(3); // parameter: how many cards we need displayed
+void poker::printCards(string player){
+        if (player == "player"){
+            for(int i = 0; i < playerOne.size(); i++){
+                cout << playerOne[i] + " ";
+            }
+        }
+        else{
+            for(int i = 0; i < dealtcards.size(); i++){
+                cout << dealtcards[i] + " ";
+            }
+        }
+        cout << endl;
+}
+
+bool poker::twoPair(){
+	int count = 0;
+    int numOfCardOne;
+    int numOfCardTwo;
+    int numOfDealtCard;
+
+    playerOne[0] = "3H";
+    playerOne[1] = "5H";
+
+    dealtcards[4] = "3H";
+    dealtcards[1] = "5H";
+
+
+    if(playerOne[0].length() == 2){
+        numOfCardOne = playerOne[0].at(0) - 48;
+    }
+    else if(playerOne[0].length() == 3){
+        numOfCardOne = 10 + (playerOne[0].at(1) - 48);
+    }
+    //cout << "numOfCardOne: " << numOfCardOne << endl;
+
+    if(playerOne[1].length() == 2){
+        numOfCardTwo = playerOne[1].at(0) - 48;
+    }
+    else if(playerOne[1].length() == 3){
+        numOfCardTwo = 10 + (playerOne[1].at(1) - 48);
+    }
+
+
+	for(int i = 0; i < dealtcards.size(); i++){
+        if(dealtcards[i].length() == 2){
+            numOfDealtCard = dealtcards[i].at(0) - 48;
+        }
+        else if(dealtcards[i].length() == 3){
+            numOfDealtCard = 10 + (dealtcards[i].at(1) - 48);
+        }
+
+        if(numOfDealtCard == numOfCardOne || numOfDealtCard == numOfCardTwo){
+            //cout << "numOfCardOne: " << numOfCardOne << endl;
+            //cout << "numOfCardTwo: " << numOfCardTwo << endl;
+            //cout << "dealtCards " << numOfDealtCard << endl;
+            count++;
+            //cout << "count: " << count << endl;
+	    }
+    }
+
+	if(count == 2){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+bool poker::pair(){
+	// if both of cards are same
+    int numOfCardOne = 0;
+    int numOfCardTwo = 0;
+    int numOfDealtCard = 0;
+
+    // Get numbers of both of player's cards so that we can compare them
+    if(playerOne[0].length() == 2){
+        numOfCardOne = playerOne[0].at(0) - 48;
+    }
+    else if(playerOne[0].length() == 3){
+        numOfCardOne = 10 + (playerOne[0].at(1) - 48);
+    }
+    //cout << "numOfCardOne: " << numOfCardOne << endl;
+
+    if(playerOne[1].length() == 2){
+        numOfCardTwo = playerOne[1].at(0) - 48;
+    }
+    else if(playerOne[1].length() == 3){
+        numOfCardTwo = 10 + (playerOne[1].at(1) - 48);
+    }
+    //cout << "numOfCardTwo: " << numOfCardTwo << endl;
+
+    // If both have same number, means that they are a pair
+    if(numOfCardOne == numOfCardTwo){
+        return true;
+    }
+
+    // Get the number of the dealer's cards and then compare them to the
+    // numbers of the players cards
+    // If are the same, are a pair
+    for(int i = 0; i < dealtcards.size(); i++){
+        if(dealtcards[i].length() == 2){
+            numOfDealtCard = dealtcards[i].at(0) - 48;
+        }
+        else if(dealtcards[i].length() == 3){
+            numOfDealtCard = 10 + (dealtcards[i].at(1) - 48);
+        }
+        //cout << "numOfDealtCard " << numOfDealtCard << endl;
+
+        if(numOfDealtCard == numOfCardOne || numOfDealtCard == numOfCardTwo){
+		    return true;
+	    }
+    }
+    return false;
+
+}
+
+bool poker::highCard(){
+	int biggestCard = 0;
+    int num;
+	for(int i = 0; i < playerOne.size(); i++){
+        // If the card 
+        if(playerOne[i].length() == 2){
+            num = playerOne[i].at(0) - 48;
+        }
+        else if(playerOne[i].length() == 3){
+            //num = playerOne[i].at(0) + playerOne[i].at(1);
+            // if card has length of 3, add 10 to the ASCII value of the
+            // second char
+            num = 10 + (playerOne[i].at(1) - 48);
+        }
+
+		if(num > biggestCard){
+			biggestCard = num;
+		}
+	}
+	// we'll always have highest card
+    //cout << biggestCard;
+	return true;
+}

@@ -25,7 +25,7 @@ class poker{
         //void totalmoney(int amount); // pool of money
         int win(); //win calls winner money at the end
                       //couts winner money 
-        int check_winner()
+        int check_winner();
         bool royalFlush();
         bool straighFlush();
         bool fourOfAKind();
