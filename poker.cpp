@@ -10,9 +10,9 @@
 
 using namespace std;
 //hi
-poker::poker() {
- playerOneMoney = 0;
-};
+//poker::poker() {
+// playerOneMoney = 0;
+//};
 
 
 /*
@@ -281,7 +281,7 @@ void poker::dealHand(int numCards)
         }
         }
                 playerOne.push_back(j); // add it to the player cards vector
-         /*   if(numPlayer == 2){
+            if(numPlayer == 2){
                 playertwo.push_back(j); // add it to the player cards vector
             }
             if(numPlayer == 3){

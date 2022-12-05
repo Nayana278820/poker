@@ -1,7 +1,7 @@
 #include <vector>
 #ifndef	POKER_H
 #define	POKER_H
-#include <cstring>
+#include <string>
 
 using namespace std;
 
@@ -88,4 +88,4 @@ class poker{
 
 };
 
-#endif POKER_H
+#endif //POKER_H
