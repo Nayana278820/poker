@@ -1,6 +1,6 @@
 #include<vector>
 #include<iostream>
-//#include "poker.h"
+#include "poker.h"
 #include <time.h>
 #include <cstdlib>
 #include <random>
@@ -10,6 +10,7 @@
 
 using namespace std;
 
+/*
 class poker{
     private:
         std::vector<string> dealtcards;
@@ -46,6 +47,7 @@ class poker{
         ~poker();
 
 };
+*/
 
 int main(){
   //  int rand();
@@ -99,6 +101,8 @@ int main(){
 		}
 
         players->win();
+         return 1;
+	}
 		/*if(move == 'r'){
 			// for initalizer: start with next player (circular way)
 			// for condition- stop when get back to that person
@@ -127,12 +131,12 @@ int main(){
 	//	if(players->numCards() != 5){
 			//players->dealHand(1, "player");
 	//	}
-    return 1;
-	}
+   
 
 	//players->win(); // cout who won and how much they won
 //}
-	
+
+/*	
 poker::poker() {
     playerOneMoney = 0;
 };
@@ -388,7 +392,7 @@ bool poker::threeOfAKind(){
     cout << " the dealer's cards are: ";
     printCards("dealer");
     */
-
+/*
     if(playerOne[0].length() == 2){
         numOfCardOne = playerOne[0].at(0) - 48;
     }
@@ -444,6 +448,7 @@ bool poker::straight (){
     playerOne[0] = "4H";
     playerOne[1] = "1H";
  */
+/*
     for(int i = 0; i < playerOne.size(); i++){
         if(playerOne[i].length() == 2){
             sortedCards.push_back(playerOne[i].at(0) - 48);
@@ -460,10 +465,10 @@ bool poker::straight (){
             sortedCards.push_back(10 + (dealtcards[i].at(1) - 48));
         }
     }
-  
+  */
   // sort(sortedCards.begin(), sortedCards.end());
   //bubble sort
-    for(int i =0; i<sortedCards.size(); i++){
+  /*  for(int i =0; i<sortedCards.size(); i++){
          for(int j=0; j<sortedCards.size()-i-1; j++){
         int swap;
         if(sortedCards[j] > sortedCards[j+1]){
@@ -485,7 +490,7 @@ bool poker::straight (){
            cout << "sorted+1 : " << sortedCards[i+1] << endl;
            cout << "count : " << count<< endl;
            */
-        }
+      /*  }
     }
        if(count >= 4){
         return true;
@@ -524,7 +529,7 @@ bool poker::flush(){ // same as three of a kind but for 5 cards
     printCards("dealer"); */
     
 
-    if(playerOne[0].length() == 2){
+  /*  if(playerOne[0].length() == 2){
         signOfCardOne = playerOne[1].at(1);
     }
     else if(playerOne[0].length() == 3){
@@ -556,20 +561,20 @@ bool poker::flush(){ // same as three of a kind but for 5 cards
            /* cout << "sign of Dealt card: " << i << " " << signOfDealtCard << endl;
             cout << "Sign of cardone: " << i << " " << signOfCardOne << endl;
             cout << "count1:  " << count1; */
-	    }
+	    /*}
         if(signOfDealtCard == signOfCardTwo){
             count2++;
             /*
             cout << "sign of Dealt card: " << i << " " << signOfDealtCard << endl;
             cout << "Sign of cardone: " << i << " " <<signOfCardOne << endl;
             cout << "count2: " << count2; */
-        }
-    }
+       // }
+  //  }
 
     // count will be three if both of player's cards are of same sign and 
     // two of same same sign are on the table
     // will be four if one of player's cards and four of table's cards are same sign
-	if(count1 >= 3 || count2 >=3){
+/*	if(count1 >= 3 || count2 >=3){
 		return true;
 	}
 	else{
@@ -590,14 +595,16 @@ bool poker::fourOfAKind(){
     int numOfCardOne;
     int numOfCardTwo;
     int numOfDealtCard;
-/*
+    */
+    
+  /*
     cout << " the player's cards are: ";
     printCards("player");
 
     cout << " the dealer's cards are: ";
     printCards("dealer");
     */
-
+/*
     if(playerOne[0].length() == 2){
         numOfCardOne = playerOne[0].at(0) - 48;
     }
@@ -677,3 +684,5 @@ int poker::win(){
 	return count;	
 
 }
+
+*/
