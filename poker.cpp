@@ -1,4 +1,9 @@
-// HEADER
+// poker.cpp
+// Created by: Isha Bhandari, Nayana Patil, Pooja Masani
+// 12/8/22
+// poker.cpp contains the functions that will be used in the poker game. This includes dealing with money,
+// dealing cards, and win conditions.
+
 #include<vector>
 #include<iostream>
 #include "poker.h"

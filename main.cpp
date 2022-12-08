@@ -1,4 +1,11 @@
-// HEADER
+// main.cpp
+// COSC: 202 Capstone Lab
+// 12/8/2022
+// Created by: Isha Bhandari, Nayana Patil, Pooja Masani
+// In main.cpp, we are allowing our poker game to run. It will have the user playing against AI. The game will be played
+// until there are 5 cards on the table and then will check win conditions to see who won. If there is a tie based
+// on the win conditions, the AI will win.
+
 #include<vector>
 #include<iostream>
 #include "poker.h"

@@ -1,4 +1,9 @@
-// HEADER
+// poker.h
+// COSC: 202
+// Created by: Isha Bhandari, Nayana Patil, Pooja Masani
+// 12/8/2022
+// poker.h contains all of our functions and variables that we will need for our poker game
+
 #ifndef	POKER_H
 #define	POKER_H
 #include <string>
@@ -39,7 +44,6 @@ class poker{
         bool highCard();
 
         poker();  
-        //~poker();
 };
 
 #endif
